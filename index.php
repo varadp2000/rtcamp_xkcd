@@ -1,4 +1,5 @@
 <?php
+$title = "Welcome to Comic Newsletter";
 include './includes/header.php';
 ?>
 

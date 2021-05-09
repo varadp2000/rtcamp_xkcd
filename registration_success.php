@@ -1,4 +1,5 @@
 <?php
+$title = "Successfully Registered";
 include './includes/header.php'
 ?>
 

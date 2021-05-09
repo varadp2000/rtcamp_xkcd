@@ -1,6 +1,7 @@
 <?php
 
 require('./includes/db.php');
+$title = "Unsubscribe";
 include './includes/header.php';
 
 $url =  $_GET['url'];

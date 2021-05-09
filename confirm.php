@@ -1,5 +1,5 @@
 <?php
-
+$title = "Verify Email";
 include './includes/header.php';
 
 echo "
