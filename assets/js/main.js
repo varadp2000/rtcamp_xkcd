@@ -80,36 +80,27 @@ $(document).ready(function () {
             , data = {
                 email: value
             };
-
-        // if empty alert message would disappear
         if (value != "") {
-            // Pre validate email on client side to reduce the server lookup
             if (validateEmailOnClientSide(value)) {
+                $('#feedbackDiv').css('color', 'green').html("Please Wait");
                 $.ajax({
                     method: 'POST',
                     url: 'libs/subscribe.php',
                     data: data,
-                    // if server return valid email then we get Green text
                     success: function (returnData) {
                         $('#feedbackDiv').css('color', 'green').html(returnData);
-                        //disableBtn(true);
                     },
-                    // if server return invalid email then we get Red text
                     error: function (xhr, status, error) {
                         $('#feedbackDiv').css('color', 'red').html("Already Registered");
-                        //disableBtn(false);
+
                     },
                     dataType: 'text'
                 });
             } else {
-                // Red text from browser side
                 $('#feedbackDiv').css('color', 'red').html("Enter a valid email");
-                //disableBtn(false);
             }
         } else {
-            // Emptying text
             $('#feedbackDiv').html("");
-            //disableBtn(false);
         }
 
     }

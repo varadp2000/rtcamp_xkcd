@@ -1,57 +1,52 @@
 <?php
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-require_once "vendor/autoload.php";
 require "./includes/db.php";
 
-
-function getComicID()
-{
-    return rand(1, 2460);
+if (!isset($_POST['auth']) || $_POST['auth'] != 'admincansendmail') {
+    http_response_code(400);
+    echo "Error";
 }
+if ($_POST['auth'] == 'admincansendmail') {
+    http_response_code(200);
+    echo("Success");
+    $curl = curl_init();
+    $XKCD_ID = getComicID();
+    $XKCD_URL = 'https://xkcd.com/' . $XKCD_ID . '/info.0.json';
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => $XKCD_URL,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+    ));
 
-$curl = curl_init();
-$XKCD_ID = getComicID();
-$XKCD_URL = 'https://xkcd.com/' . $XKCD_ID . '/info.0.json';
-curl_setopt_array($curl, array(
-    CURLOPT_URL => $XKCD_URL,
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_ENCODING => '',
-    CURLOPT_MAXREDIRS => 10,
-    CURLOPT_TIMEOUT => 0,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    CURLOPT_CUSTOMREQUEST => 'GET',
-));
-
-$response = curl_exec($curl);
-$response = json_decode($response);
-curl_close($curl);
-echo json_encode($response) . ".\n";
-
-
-
-$sql = "SELECT email, subscriber_name, unsubscribe_URL FROM subscribers WHERE is_activated = 1";
-$result = $conn->query($sql);
+    $response = curl_exec($curl);
+    $response = json_decode($response);
+    curl_close($curl);
+    echo json_encode($response) . ".\n";
 
 
-$file = file_get_contents($response->img);
-$encoded_file = chunk_split(base64_encode($file));
 
-echo $encoded_file;
-
-$attachments[] = array(
-    'name' => 'image.jpg', // Set File Name
-    'data' => $encoded_file, // File Data
-    'type' => 'application/pdf', // Type
-    'encoding' => 'base64' // Content-Transfer-Encoding
-);
+    $sql = "SELECT email, subscriber_name, unsubscribe_URL FROM subscribers WHERE is_activated = 1";
+    $result = $conn->query($sql);
 
 
-while ($email = $result->fetch_row()) {
-    $Body = "
+    $file = file_get_contents($response->img);
+    $encoded_file = chunk_split(base64_encode($file));
+
+
+    $attachments[] = array(
+        'name' => 'image.jpg', // Set File Name
+        'data' => $encoded_file, // File Data
+        'type' => 'application/pdf', // Type
+        'encoding' => 'base64' // Content-Transfer-Encoding
+    );
+
+
+    while ($email = $result->fetch_row()) {
+        $Body = "
         <p >Hello Subscriber</p>
         Here is your Comic for the day
         <h3>$response->title</h3>
@@ -60,8 +55,9 @@ while ($email = $result->fetch_row()) {
         To read the comic head to <a target='_blank' href='https://xkcd.com/' . $XKCD_ID'>Here</a><br />
         To unsubscribe kindly visit <a href='http://" . $_SERVER['SERVER_NAME'] . "/rtcamp_xkcd/unsubscribe.php?url=$email[2]'>here.</a>
         ";
-    $subject = "Hello " . $email[1] . ", Here is your new comic";
-    sendMail($email[0] ,$Body, $subject , $attachments);
+        $subject = "Hello " . $email[1] . ", Here is your new comic";
+        sendMail($email[0], $Body, $subject, $attachments);
+    }
 }
 
 
@@ -134,4 +130,8 @@ function sendMail(
     }
 }
 
-?>
+
+function getComicID()
+{
+    return rand(1, 2460);
+}

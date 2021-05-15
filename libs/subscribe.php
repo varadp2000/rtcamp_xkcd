@@ -4,7 +4,6 @@ require('../includes/db.php');
 if (isset($_POST['email'])) {
     $email = $_POST['email'];
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        
         $sql = "SELECT * FROM subscribers WHERE email = '$email' AND is_activated = '0'";
         $result = $conn->query($sql);
         if($result->num_rows ==  1){
@@ -43,6 +42,7 @@ if (isset($_POST['email'])) {
 
         $sql = "SELECT * FROM subscribers WHERE email = '$email' AND is_activated = '1'";
         $result = $conn->query($sql);
+        
         if($result->num_rows == 0){
             $OTP = mt_rand(100000, 999999);
             http_response_code(200);
@@ -153,4 +153,3 @@ function sendMail(
         return mail($email, $subject, $message, implode("\r\n", $headers));
     }
 }
-?>
