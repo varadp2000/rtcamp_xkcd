@@ -1,6 +1,7 @@
 # XKCD RTCamp
 
 ## XKCD Mailer Project for RTCamp Assignment
+## Built using HTML, JavaScript, CSS, JQuery, PHP and MySQL
 
 ### 1.Enter Email
 ![](./imgs/1.png)
