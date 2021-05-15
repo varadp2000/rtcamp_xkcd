@@ -13,7 +13,11 @@
         ini_set("SMTP", "smtp.mailtrap.io");
         ini_set("auth_username", "c2848f14bdeffa");
         ini_set("auth_password", "8ab109b4c9792c");
-    mail("varadrpatil27@gmail.com", "Hello Their", "If you're reading this", "From: varad"); 
+
+    if(mail("varadrpatil27@gmail.com", "Hello Their", "If you're reading this", "From: varad"))
+        print_r(error_get_last());
+    else
+        print_r(error_get_last());
 
 
     // function sendMail(

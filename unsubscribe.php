@@ -4,6 +4,14 @@ require('./includes/db.php');
 $title = "Unsubscribe";
 include './includes/header.php';
 
+if(!$_GET){
+    ?>
+    <script>
+    window.location.replace('/rtcamp_xkcd');
+    </script>
+    <?php
+}
+
 $url =  $_GET['url'];
 $sql = "SELECT subscriber_name from subscribers WHERE unsubscribe_URL = '$url';";
 $result = $conn->query($sql);
