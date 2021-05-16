@@ -1,8 +1,11 @@
 # XKCD Comic Mailer RTCamp
 
 ## XKCD Mailer Project for RTCamp Assignment <br /> Built using HTML, JavaScript, CSS, JQuery, PHP and MySQL <br />Get XKCD Comics in your inbox every 5 minutes
+<br />
+<br />
 
-<iframe link="https://www.youtube.com/watch?v=3wE1-IezToo&feature=youtu.be" >
+### Watch This Video for Demonstration of Project
+[![Watch the video](./imgs/0.png)](https://www.youtube.com/watch?v=3wE1-IezToo&feature=youtu.be)
 
 ### 1.Enter Email
 ![](./imgs/1.png)
