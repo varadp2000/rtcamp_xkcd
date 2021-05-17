@@ -21,6 +21,9 @@
 <?php
     require('./includes/db.php');
     session_start();
+    echo "<script>
+        document.cookie = 'step=1'
+    </script>";
 ?>
     <!-- <nav class="navbar navbar-expand-lg navbar-dark" style="height:10vh;background-color:rgba(0,0,0,0);position:fixed">
         <div class="container-fluid">

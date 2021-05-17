@@ -2,11 +2,10 @@
 $title = "Verify Email";
 include './includes/header.php';
 
-echo "
-    <script>
-        document.cookie = 'step=1'
-    </script>
-";
+echo "<script>
+        document.cookie = 'step=1';
+        window.reload();
+    </script>";
 
 if (!isset($_GET['email'])) {
 
