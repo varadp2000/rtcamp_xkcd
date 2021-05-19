@@ -3,7 +3,7 @@ name: Trigger Site Rebuild on a CRON Schedule
 
 on:
   schedule:
-    - cron: '0,5,10,15,20,25,30,35,40,45,50,55 * * * *'
+    - cron: '*/5 * * * *'
 jobs:
   build:
     name: Send Comics
