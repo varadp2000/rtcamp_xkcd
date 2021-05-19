@@ -1,0 +1,16 @@
+on: pull_request
+name: Temp file check
+jobs:
+  fileCheck:
+    name: fileCheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Temp file check
+        run: |
+               mv "$GITHUB_WORKSPACE/.github/temp-files/.gitignore" "$GITHUB_WORKSPACE/.gitignore"
+               git check-ignore -v $(find . -type f -print) && exit 1 || echo "Temp file check passed"
+               git check-ignore -v $(find . -type d -print) && exit 1 || echo "Temp directory check passed"
+      - name: Failure message
+        if: failure()
+        run: echo "Please check the file found in above step is necessary. In case it is temporary, please remove it."

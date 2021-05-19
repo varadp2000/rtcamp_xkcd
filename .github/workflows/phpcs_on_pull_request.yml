@@ -1,0 +1,15 @@
+on: pull_request
+name: Inspections
+jobs:
+  runPHPCSInspection:
+    name: Run PHPCS inspection
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+    - name: Run PHPCS inspection
+      uses: docker://ghcr.io/rtcamp/action-phpcs-code-review:classroom
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SKIP_FOLDERS: "tests,.github,vendor,node_modules"

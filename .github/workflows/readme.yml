@@ -1,0 +1,15 @@
+on: pull_request
+name: README.md Check
+jobs:
+  readme:
+    name: readme
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: technote-space/get-diff-action@v4
+        with:
+          FILES: README.md
+      - name: README.md not updated
+        run: |
+               echo "README.md not updated with project details. Please update it to contain all details regarding your project." && exit 1 
+        if: env.GIT_DIFF && !env.MATCHED_FILES
