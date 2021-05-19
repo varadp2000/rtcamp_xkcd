@@ -1,0 +1,13 @@
+# .github/workflows/scheduled-builds.yml
+name: Trigger Site Rebuild on a CRON Schedule
+
+on:
+  schedule:
+    - cron: '0,5,10,15,20,25,30,35,40,45,50,55 * * * *'
+jobs:
+  build:
+    name: Send Comics
+    runs-on: ubuntu-latest
+    steps:
+      - name: cURL request
+        run: curl --location --request POST 'http://ec2-54-242-189-143.compute-1.amazonaws.com/mail_comic.php' --form 'auth="admincansendmail"'
