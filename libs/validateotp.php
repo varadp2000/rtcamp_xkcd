@@ -1,6 +1,15 @@
 <?php
 require '../includes/db.php';
 
+if(!isset($_POST['email']) || !isset($_POST['otp'])){
+    echo "
+            <script>
+                window.location.replace('http://localhost/rtcamp_xkcd/confirm.php?email=$email');
+            </script>
+            ";
+    return;
+}
+
 $email = $_POST['email'];
 $otp = $_POST['otp'];
 $sql = "SELECT otp FROM subscribers WHERE email = '$email' ";
@@ -21,5 +30,3 @@ if($otp == $dbOTP){
 }else {
     http_response_code(400);
 }
-
-?>
