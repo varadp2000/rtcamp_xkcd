@@ -13,7 +13,7 @@ include './includes/header.php'
             <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
         </svg>
         <h5 style="color:white">
-            Thank you so much for registering with us for XKCD Comic Newsletter.
+            Thank you so much for registering with us for XKCD Comic Newsletter.ṣ
             <br />
             You will receive next Comic in couple of Moments
         </h5>
