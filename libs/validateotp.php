@@ -12,6 +12,20 @@ if(!isset($_POST['email']) || !isset($_POST['otp'])){
 
 $email = $_POST['email'];
 $otp = $_POST['otp'];
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(426);
+    echo 'Enter Valid Email';
+    return;
+}
+
+if (strlen($name) != 6) {
+    http_response_code(426);
+    echo 'Enter Valid OTP';
+    return;
+}
+
+
 $sql = "SELECT otp FROM subscribers WHERE email = '$email' ";
 $result = $conn->query($sql);
 

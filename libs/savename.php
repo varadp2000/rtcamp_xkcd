@@ -16,11 +16,13 @@ $name = $_POST['name'];
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(426);
     echo 'Enter Valid Email';
+    return;
 }
 
 if (strlen($name) > 10) {
     http_response_code(426);
     echo 'Enter Valid Name';
+    return;
 }
 
 $SQL = "SELECT email FROM subscribers WHERE email = '$email' AND is_activated = 1";
