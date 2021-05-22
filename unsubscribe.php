@@ -49,7 +49,7 @@ if ($result->num_rows == 0 || !$conn->query($sql)) {
             <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
         </svg>
         <h5 style="color:white;text-align:left">
-            Dear <?php echo $uname ?>
+            Dear <?php echo $uname; ?>
             <br />
             You have been successfully unsubscribed from Comic Newsletter.<br /> Head to <a href="index.php">here</a> to Subscribe again for newsletter.
         </h5>
