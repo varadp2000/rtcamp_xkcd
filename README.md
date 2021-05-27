@@ -4,6 +4,11 @@
 <br />
 <br />
 
+## Hosted At
+```
+http://ec2-54-242-189-143.compute-1.amazonaws.com/
+```
+
 ### Watch This Video for Demonstration of Project
 [![Watch the video](./imgs/0.png)](https://www.youtube.com/watch?v=3wE1-IezToo&feature=youtu.be)
 
