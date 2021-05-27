@@ -1,8 +1,7 @@
 <?php
 
-require('./includes/db.php');
 $title = "Unsubscribe";
-include './includes/header.php';
+require './includes/header.php';
 
 if(!$_GET){
     ?>
@@ -58,5 +57,5 @@ if ($result->num_rows == 0 || !$conn->query($sql)) {
 
 <?php
 }
-include './includes/footer.php';
+require('./includes/footer.php');
 ?>

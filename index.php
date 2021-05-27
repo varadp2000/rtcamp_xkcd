@@ -1,6 +1,6 @@
 <?php
 $title = "Welcome to Comic Newsletter";
-include './includes/header.php';
+require('./includes/header.php');
 ?>
 
 <div class="main-div center-box">
@@ -18,6 +18,6 @@ include './includes/header.php';
 </div>
 
 <?php
-include './includes/footer.php';
+require('./includes/footer.php');
 
 ?>

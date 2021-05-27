@@ -1,6 +1,6 @@
 <?php
 $title = "Verify Email";
-include './includes/header.php';
+require('./includes/header.php');
 
 echo "<script>
         document.cookie = 'step=1';
@@ -68,5 +68,5 @@ if ($_COOKIE['step'] == 1) {
 <?php
 
 }
-include './includes/footer.php';
+require('./includes/footer.php');
 ?>
