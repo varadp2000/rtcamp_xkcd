@@ -57,5 +57,5 @@ if ($result->num_rows == 0 || !$conn->query($sql)) {
 
 <?php
 }
-require('./includes/footer.php');
+require './includes/footer.php';
 ?>

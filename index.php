@@ -1,6 +1,6 @@
 <?php
 $title = "Welcome to Comic Newsletter";
-require('./includes/header.php');
+require './includes/header.php';
 ?>
 
 <div class="main-div center-box">
@@ -18,6 +18,6 @@ require('./includes/header.php');
 </div>
 
 <?php
-require('./includes/footer.php');
+require './includes/footer.php';
 
 ?>
