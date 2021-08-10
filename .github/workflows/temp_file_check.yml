@@ -3,7 +3,7 @@ name: Temp file check
 jobs:
   fileCheck:
     name: fileCheck
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - name: Temp file check
@@ -14,3 +14,8 @@ jobs:
       - name: Failure message
         if: failure()
         run: echo "Please check the file found in above step is necessary. In case it is temporary, please remove it."
+
+      - name: Cleanup
+        if: ${{ always() }}
+        uses: rtCamp/action-cleanup@master
+

@@ -1,0 +1,21 @@
+.center-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.main-div {
+  background:rgb(9, 52, 146);
+  height: 100vh;
+  text-align: center;
+}
+
+#feedbackDiv {
+  text-align: left;
+}
+
+.feedback-wrapper {
+  text-align: left;
+  margin-top: 5px;
+}

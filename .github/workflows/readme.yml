@@ -3,7 +3,7 @@ name: README.md Check
 jobs:
   readme:
     name: readme
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - uses: technote-space/get-diff-action@v4
@@ -13,3 +13,8 @@ jobs:
         run: |
                echo "README.md not updated with project details. Please update it to contain all details regarding your project." && exit 1 
         if: env.GIT_DIFF && !env.MATCHED_FILES
+
+      - name: Cleanup
+        if: ${{ always() }}
+        uses: rtCamp/action-cleanup@master
+
