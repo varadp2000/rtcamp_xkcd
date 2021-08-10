@@ -1,2 +1,0 @@
-curl --location --request POST 'http://192.168.0.106/rtcamp_xkcd/mail_comic.php' \
---form 'auth="admincansendmail"'
