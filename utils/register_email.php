@@ -5,9 +5,8 @@ $data  = file_get_contents( 'php://input' );
 $data  = json_decode( $data, true );
 $email = $data['email'];
 if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-	// http_response_code( 400 );
-	// returnResponse( 'Enter Valid Email' );
-	returnResponse( $email );
+	http_response_code( 400 );
+	returnResponse( 'Enter Valid Email' );
 	exit();
 }
 
