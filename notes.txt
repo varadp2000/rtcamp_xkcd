@@ -1,6 +1,6 @@
 #TODO
 Write Readme.md
-
+Use phpcbf to resolve PHPCS errors
 
 #Readme Points
 1.Deployment Instructions
