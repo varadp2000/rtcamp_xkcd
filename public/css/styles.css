@@ -1,0 +1,17 @@
+.center-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.main-div {
+  height: 100vh;
+  text-align: center;
+}
+
+body {
+  background: rgb(9, 52, 146);
+  color: white;
+  font-family: "Lato", sans-serif;
+}

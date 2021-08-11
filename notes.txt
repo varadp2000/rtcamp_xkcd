@@ -1,0 +1,7 @@
+#TODO
+Write Readme.md
+
+
+#Readme Points
+1.Deployment Instructions
+    Storing global credentials in .htaccess file
