@@ -1,0 +1,17 @@
+{
+    "name": "varad/php-varadp2000",
+    "require": {
+        "wp-coding-standards/wpcs": "^2.3",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.6",
+        "wp-coding-standards/wpcs": "^2.3"
+    },
+    "authors": [
+        {
+            "name": "Varad Patil",
+            "email": "varadrpatil27@gmail.com"
+        }
+    ]
+}

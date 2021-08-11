@@ -5,7 +5,6 @@
 <div class="main-div center-div">
 	<h1>Hello World</h1>
 </div>
-
 <?php
 	require_once __DIR__ . '\includes\footer.php';
 ?>
