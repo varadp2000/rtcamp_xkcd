@@ -5,8 +5,9 @@ $data  = file_get_contents( 'php://input' );
 $data  = json_decode( $data, true );
 $email = $data['email'];
 if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL )) {
-	http_response_code( 400 );
-	echo 'Enter Valid Email';
+	// http_response_code( 400 );
+	// returnResponse( 'Enter Valid Email' );
+	returnResponse( $email );
 	exit();
 }
 
@@ -18,7 +19,7 @@ if ( $con ) {
 		$stmt->execute();
 		$stmt->store_result();
 		$numRows = $stmt->num_rows;
-		if ($numRows == 0) {
+		if ($numRows === 0) {
 			$email_hash = md5( $email );
 			$stmt       = $con->prepare( 'INSERT INTO `subscribers` (`email`, `otp`, `email_hash`) VALUES (?, ?, ?)' );
 			$stmt->bind_param( 'sis', $email, $OTP, $email_hash );
@@ -30,6 +31,7 @@ if ( $con ) {
 		}
 		http_response_code( 200 );
 		returnResponse( 'Check your inbox for OTP' );
+		exit();
 	} catch (\Throwable $th) {
 		echo $th;
 		http_response_code( 500 );

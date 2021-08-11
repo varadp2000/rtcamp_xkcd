@@ -1,3 +1,6 @@
+//Links
+const verify_email = "./utils/register_email.php";
+
 //DOM Elements
 const email_submit         = document.getElementById( "email-submit-btn" );
 const alert_msg            = document.getElementById( "alert-msg" );
@@ -12,12 +15,20 @@ const new_user_name        = document.getElementById( "new-user-name" );
 //Event Listeners
 email_submit.addEventListener(
 	"click",
-	function () {
-		console.log( "Email Submit Button Clicked" );
-		if (ValidateEmail( email.value )) {
-			showOTPDiv();
-			sessionStorage.setItem( "email", email.value );
-			alert_msg.innerHTML = "Thank you for your email!";
+	async function() {
+		if ( ValidateEmail( email.value ) ) {
+			let resp               = await asyncAjaxRequest( verify_email, "POST", { email: email.value } );
+			const { status, data } = resp;
+			switch (status) {
+				case 200:
+					sessionStorage.setItem( "email", email.value );
+					alert_msg.innerHTML = data;
+					showOTPDiv();
+					break;
+				default:
+					alert_msg.innerHTML = data;
+					break;
+			}
 
 		} else {
 			alert_msg.innerHTML = "Please enter a valid email address!";
@@ -63,3 +74,32 @@ const showRegisterSuccessDiv   = () => {
 	otp_input.style            = "display:none";
 	registration_success.style = "display:block";
 }
+
+const asyncAjaxRequest = async(
+	link,
+	method,
+	body
+) => {
+		let res;
+		body           = JSON.stringify( body );
+	if (body === null) {
+		res = await fetch(
+			link,
+			{
+				method: method,
+				}
+		);
+	} else {
+		res = await fetch(
+			link,
+			{
+				method: method,
+				body: body,
+				}
+		);
+	}
+		const data = await res.json();
+		//console.log(data);
+		//console.log(res.status);
+		return { status: res.status, data: data };
+	};
