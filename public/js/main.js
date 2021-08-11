@@ -47,7 +47,7 @@ const showOTPDiv = function () {
 }
 
 const ValidateOTP = function (otp) {
-	if(otp.length > 0 && otp.length == 6) {
+	if (otp.length > 0 && otp.length == 6) {
 		return (true)
 	}
 	return (false)
