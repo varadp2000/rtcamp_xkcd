@@ -12,12 +12,22 @@ const otp_submit           = document.getElementById( "otp-submit-btn" );
 const otp                  = document.getElementById( "OTP" );
 const registration_success = document.getElementById( "register-success" );
 const new_user_name        = document.getElementById( "new-user-name" );
+const email_text           = document.getElementById( "email-text" );
+const email_loader         = document.getElementById( "email-loader" );
+const otp_text             = document.getElementById( "otp-text" );
+const otp_loader           = document.getElementById( "otp-loader" );
+
+//Constants
+const loading_classes = ["fa", "fa-circle-o-notch", "fa-spin"];
 
 //Event Listeners
 email_submit.addEventListener(
 	"click",
-	async function() {
-		if ( ValidateEmail( email.value ) ) {
+	async function () {
+		email_loader.classList.remove( "hidden-class" );
+		email_text.classList.add( "hidden-class" );
+		email_loader.classList.add( ...loading_classes );
+		if (ValidateEmail( email.value )) {
 			let resp               = await asyncAjaxRequest( verify_email, "POST", { email: email.value } );
 			const { status, data } = resp;
 			switch (status) {
@@ -34,12 +44,18 @@ email_submit.addEventListener(
 		} else {
 			alert_msg.innerHTML = "Please enter a valid email address!";
 		}
+		email_loader.classList.add( "hidden-class" );
+		email_text.classList.remove( "hidden-class" );
+		email_loader.classList.remove( ...loading_classes );
 	}
 )
 
 otp_submit.addEventListener(
 	"click",
 	async function () {
+		email_loader.classList.remove( "hidden-class" );
+		email_text.classList.add( "hidden-class" );
+		email_loader.classList.add( ...loading_classes );
 		if (ValidateOTP( otp.value )) {
 			let email              = sessionStorage.getItem( "email" );
 			let resp               = await asyncAjaxRequest( verify_otp, "POST", { email: email, otp: otp.value } );
@@ -58,6 +74,9 @@ otp_submit.addEventListener(
 		} else {
 			alert_msg.innerHTML = "Please enter a valid email address!";
 		}
+		email_loader.classList.add( "hidden-class" );
+		email_text.classList.remove( "hidden-class" );
+		email_loader.classList.remove( ...loading_classes );
 	}
 )
 

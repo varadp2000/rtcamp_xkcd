@@ -26,6 +26,7 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  width: 300px;
 }
 
 .submit-btn {
@@ -37,6 +38,7 @@ input {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 150px;
 }
 
 label {
@@ -54,3 +56,12 @@ label {
 #register-success{
 	display: none;
 }
+
+.hidden_class{
+	display: none;
+}
+
+.show-class{
+	display: block;
+}
+

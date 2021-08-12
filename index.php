@@ -4,19 +4,27 @@ require_once __DIR__ . '\includes\navbar.php';
 ?>
 <div class="main-div center-div">
 	<div id="email-input">
+		<h1>Welcome to XKCD Comic Mailer<br /></h1>
+		<p> Enter your email address and Enjoy!!</p>
+		<br />
 		<!--- Take email as input -->
-		<span class="label">Email:</span>
+		<span class="label">Email:</span><br />
 		<input type="email" name="email" id="email" placeholder="Enter your email">
 
 		<!--- Verify Email Button -->
-		<button class="submit-btn" id="email-submit-btn" type="submit" name="verify">Verify Email</button>
+		<button class="submit-btn" id="email-submit-btn" type="submit" name="verify">
+			<span id="email-text">Verify Email</span>
+			<i id="email-loader" class="hidden-class"></i>
+		</button>
 	</div>
 	<div id="otp-input">
 		<!--- Take email as input -->
-		<span class="label">OTP:</span>
+		<span class="label">OTP:</span><br />
 		<input type="number" name="OTP" id="OTP" placeholder="Enter your OTP">
 		<!--- Verify Email Button -->
-		<button class="submit-btn" id="otp-submit-btn" type="submit" name="verify">Verify OTP</button>
+		<button class="submit-btn" id="otp-submit-btn" type="submit" name="verify">
+			<span id="otp-text">Verify Email</span>
+			<i id="otp-loader" class="hidden-class"></i>
 
 	</div>
 	<div id="register-success">
