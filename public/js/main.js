@@ -1,5 +1,6 @@
 //Links
 const verify_email = "./utils/register_email.php";
+const verify_otp   = "./utils/validate_otp.php";
 
 //DOM Elements
 const email_submit         = document.getElementById( "email-submit-btn" );
@@ -38,13 +39,24 @@ email_submit.addEventListener(
 
 otp_submit.addEventListener(
 	"click",
-	function () {
-		console.log( "OTP Submit Button Clicked" );
+	async function () {
 		if (ValidateOTP( otp.value )) {
-			showRegisterSuccessDiv();
-			new_user_name.innerHTML = sessionStorage.getItem( "email" );
+			let email              = sessionStorage.getItem( "email" );
+			let resp               = await asyncAjaxRequest( verify_otp, "POST", { email: email, otp: otp.value } );
+			const { status, data } = resp;
+			console.log( resp );
+			switch (status) {
+				case 200:
+					alert_msg.innerHTML = data;
+					showRegisterSuccessDiv();
+					break;
+				default:
+					alert_msg.innerHTML = data;
+					break;
+			}
+
 		} else {
-			alert_msg.innerHTML = "Please enter a valid OTP!";
+			alert_msg.innerHTML = "Please enter a valid email address!";
 		}
 	}
 )
@@ -80,7 +92,8 @@ const asyncAjaxRequest = async(
 	method,
 	body
 ) => {
-		let res;
+	let res;
+	console.log( body );
 		body           = JSON.stringify( body );
 	if (body === null) {
 		res = await fetch(
@@ -99,7 +112,7 @@ const asyncAjaxRequest = async(
 		);
 	}
 		const data = await res.json();
-		//console.log(data);
+		console.log( data );
 		//console.log(res.status);
 		return { status: res.status, data: data };
 	};

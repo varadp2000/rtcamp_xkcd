@@ -11,28 +11,31 @@ if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL )) {
 }
 if ( $otp < 100000 || $otp > 999999 ) {
 	http_response_code( 400 );
-	echo $otp;
 	returnResponse( 'Enter Valid OTP' );
 	exit();
 }
 $db_otp = 0;
 try {
 	//Select the user from the database with email
-	$stmt = $con->prepare( 'SELECT otp FROM `subscribers` WHERE email = ?' );
+	$stmt = $con->prepare( 'SELECT otp, is_activated FROM `subscribers` WHERE email = ?' );
 	$stmt->bind_param( 's', $email );
 	$stmt->execute();
 	$stmt->store_result();
-	$stmt->bind_result( $db_otp );
+	$stmt->bind_result( $db_otp, $is_activated );
 	$stmt->fetch();
 	$db_otp  = intval( $db_otp );
+	$otp     = intval( $otp );
 	$numRows = $stmt->num_rows;
 	if ( $numRows === 0) {
 		http_response_code( 404 );
 		returnResponse( 'User Not Found' );
 		exit();
+	} elseif ($is_activated === 1) {
+		http_response_code( 401 );
+		returnResponse( 'Already Registered' );
+		exit();
 	} else {
 		if ($db_otp !== $otp) {
-			echo $db_otp . ' ' . $otp . '\n';
 			http_response_code( 400 );
 			returnResponse( 'Invalid OTP' );
 			exit();

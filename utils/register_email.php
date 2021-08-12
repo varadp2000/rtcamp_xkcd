@@ -13,11 +13,18 @@ if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL )) {
 $OTP = genetateOTP();
 if ( $con ) {
 	try {
-		$stmt = $con->prepare( 'SELECT * FROM `subscribers` WHERE email=?' );
+		$stmt = $con->prepare( 'SELECT is_activated FROM `subscribers` WHERE email=?' );
 		$stmt->bind_param( 's', $email );
 		$stmt->execute();
 		$stmt->store_result();
+		$stmt->bind_result( $is_activated );
+		$stmt->fetch();
 		$numRows = $stmt->num_rows;
+		if ($is_activated === 1) {
+			http_response_code( 201 );
+			returnResponse( 'Already Registered, please try different email address' );
+			exit();
+		}
 		if ($numRows === 0) {
 			$email_hash = md5( $email );
 			$stmt       = $con->prepare( 'INSERT INTO `subscribers` (`email`, `otp`, `email_hash`) VALUES (?, ?, ?)' );
