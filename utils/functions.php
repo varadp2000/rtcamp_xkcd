@@ -45,7 +45,8 @@ function sendComic( $to, $subject, $message, $attachments = array() ) {
 }
 
 function sendMail( $to, $subject, $message ) {
-	$headers = 'From: team@xkcd_mailer.com' . "\r\n";
+	$headers  = 'From: team@xkcd_mailer.com' . "\r\n";
+	$headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
 
 	mail( $to, $subject, $message, $headers );
 }

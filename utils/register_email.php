@@ -35,11 +35,14 @@ if ( $con ) {
 			$stmt->bind_param( 'is', $OTP, $email );
 			$stmt->execute();
 		}
-		http_response_code( 200 );
-		returnResponse( 'Check your inbox for OTP' );
-		$mail_text    = "Welcome to XKCD Comic Mailer.\nYour OTP for email validation is $OTP.\nEnjoy!";
+		$SERVER_NAME = isset( $_SERVER['SERVER_NAME'] ) ? $_SERVER['SERVER_NAME'] : '';
+		$mail_text   = "<h1>Welcome to XKCD Comic Mailer.</h1>\nYour OTP for email validation is $OTP.\nEnjoy!\n or";
+		$mail_text  .= "click <a href='http://" . $SERVER_NAME . '/subscribe.php?email=' . $email . '&otp=' . md5( $OTP ) . "'>here.</a>";
+
 		$mail_subject = 'XKCD Comic Mailer - OTP';
 		sendMail( $email, $mail_subject, $mail_text, '' );
+		http_response_code( 200 );
+		returnResponse( 'Check your inbox for OTP' );
 		exit();
 	} catch (\Throwable $th) {
 		echo $th;

@@ -11,7 +11,7 @@ $email = $_GET['email'];
 $id    = $_GET['id'];
 
 if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) && strlen( $id ) !== 32 ) {
-	header( 'Location: /php-varadp2000/404.php' );
+	header( 'Location: /404.php' );
 }
 try {
 	$stmt = $con->prepare( 'SELECT email, email_hash FROM `subscribers` WHERE email = ? AND email_hash = ? ' );
@@ -22,10 +22,10 @@ try {
 	$stmt->close();
 } catch (\Throwable $th) {
 	echo $th->getMessage();
-	header( 'Location: /php-varadp2000/404.php' );
+	header( 'Location: /404.php' );
 }
 if ( $email !== $db_email || $email_hash !== $id ) {
-	header( 'Location: /php-varadp2000/404.php' );
+	header( 'Location: /404.php' );
 } else {
 	try {
 		$stmt = $con->prepare( 'UPDATE `subscribers` SET is_activated = 0 WHERE email = ?' );
@@ -33,7 +33,7 @@ if ( $email !== $db_email || $email_hash !== $id ) {
 		$stmt->execute();
 	} catch (\Throwable $th) {
 		echo $th->getMessage();
-		header( 'Location: /php-varadp2000/404.php' );
+		header( 'Location: /404.php' );
 	}
 
 
