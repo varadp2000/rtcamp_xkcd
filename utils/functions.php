@@ -1,7 +1,5 @@
 <?php
 
-require_once '../includes/db.php';
-
 function genetateOTP () {
 	return random_int( 100000, 999999 );
 }

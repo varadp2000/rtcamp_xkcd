@@ -1,5 +1,6 @@
 <?php
 require_once './functions.php';
+require_once '../includes/db.php';
 $data  = file_get_contents( 'php://input' );
 $data  = json_decode( $data, true );
 $email = $data['email'];
