@@ -39,7 +39,7 @@ if ( $con ) {
 		returnResponse( 'Check your inbox for OTP' );
 		$mail_text    = "Welcome to XKCD Comic Mailer.\nYour OTP for email validation is $OTP.\nEnjoy!";
 		$mail_subject = 'XKCD Comic Mailer - OTP';
-		sendMail( $email, $mail_subject, $mail_text );
+		sendMail( $email, $mail_subject, $mail_text, '' );
 		exit();
 	} catch (\Throwable $th) {
 		echo $th;
