@@ -4,7 +4,7 @@ require_once './includes/navbar.php';
 
 
 if ( ! isset( $_GET['email'] ) && ! isset( $_GET['id'] )) {
-	header( 'Location: /php-varadp2000/404.php' );
+	header( 'Location: /404.php' );
 }
 
 $email = $_GET['email'];

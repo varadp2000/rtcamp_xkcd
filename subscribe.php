@@ -5,7 +5,7 @@ require_once './includes/navbar.php';
 
 if ( ! isset( $_GET['email'] ) && ! isset( $_GET['otp'] )) {
 	echo 'Param Not Set';
-	//header( 'Location: /404.php' );
+	header( 'Location: /404.php' );
 }
 
 $email = $_GET['email'];
@@ -13,7 +13,7 @@ $otp   = $_GET['otp'];
 
 if ( ! filter_var( $email, FILTER_VALIDATE_EMAIL ) && strlen( $otp ) !== 32 ) {
 	echo 'Invalid Params';
-	//header( 'Location: /404.php' );
+	header( 'Location: /404.php' );
 }
 try {
 	$stmt = $con->prepare( 'SELECT email, otp FROM `subscribers` WHERE email = ? ' );
@@ -25,11 +25,11 @@ try {
 	$otp_hash = md5( $db_otp );
 } catch (\Throwable $th) {
 	echo $th->getMessage();
-	//header( 'Location: /404.php' );
+	header( 'Location: /404.php' );
 }
 if ( $email !== $db_email || $otp !== $otp_hash ) {
 	echo 'Credentials Missmatch';
-	//header( 'Location: /404.php' );
+	header( 'Location: /404.php' );
 } else {
 	try {
 		$stmt = $con->prepare( 'UPDATE `subscribers` SET is_activated = 1 WHERE email = ?' );
@@ -37,7 +37,7 @@ if ( $email !== $db_email || $otp !== $otp_hash ) {
 		$stmt->execute();
 	} catch (\Throwable $th) {
 		echo $th->getMessage();
-		//header( 'Location: /404.php' );
+		header( 'Location: /404.php' );
 	}
 
 

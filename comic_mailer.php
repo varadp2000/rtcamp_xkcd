@@ -38,7 +38,7 @@ if ($stmt->num_rows > 0) {
         <img src='" . $comic['img'] . "' alt='some comic hehe'/>
         <br />
         To read the comic head to <a target='_blank' href='https://xkcd.com/" . $comic['num'] . "'>Here</a><br />
-        To unsubscribe kindly visit <a href='http://" . $SERVER_NAME . '/php-varadp2000/unsubscribe.php?email=' . $mail . '&id=' . md5( $mail ) . "'>here.</a>
+        To unsubscribe kindly visit <a href='http://" . $SERVER_NAME . '/unsubscribe.php?email=' . $mail . '&id=' . md5( $mail ) . "'>here.</a>
         ";
 		sendComic( $mail, $title, $Body, $attachments );
 	}
