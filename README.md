@@ -20,6 +20,7 @@ https://ec2-54-159-118-33.compute-1.amazonaws.com/
 - Enter proper details in ```.htaccess```
 - Import ```db_schema.sql``` to get DB Strcture
 - Use ```cron``` file to get the cronjob
+- Add Auth Password setted on server in emply double quotes in cron config 
 - Cron Settings: ```0,5,10,15,20,25,30,35,40,45,50,50,55 * * * * ```
 
 ## Getting Started

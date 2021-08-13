@@ -1,2 +1,2 @@
 curl --location --request POST 'https://ec2-54-159-118-33.compute-1.amazonaws.com/comic_mailer.php' \
---form 'auth="admincansendmail"'
+--form 'auth=""'
