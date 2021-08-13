@@ -1,15 +1,15 @@
 <?php
 require_once './utils/functions.php';
 require_once './includes/db.php';
-//if ( ! isset( $_POST['secret'] )) {
-//	header( 'Location: /php-varadp2000/404.php' );
-//}
-//else{
-//$secret = $_POST['secret'];
-//}
-//if(strlen('serect') !== 12){
-//	header( 'Location: /php-varadp2000/404.php' );
-//}
+$secret = '';
+if ( ! isset( $_POST['secret'] )) {
+	die( 'Token Not FOund' );
+} else {
+	$secret = $_POST['secret'];
+}
+if (strlen( $secret ) !== getenv( 'HTTP_SECRET_LEN' ) && $secret !== getenv( 'HTTP_CRON_SECRET' )) {
+	die( 'Invalid TOken' );
+}
 $SERVER_NAME = isset( $_SERVER['SERVER_NAME'] ) ? $_SERVER['SERVER_NAME'] : '';
 $stmt        = $con->prepare( 'SELECT email FROM `subscribers` WHERE is_activated = 1' );
 $stmt->execute();
