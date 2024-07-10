@@ -12,9 +12,6 @@
 - Mailgun(Github Student Pack)
 - Amazon Web Services(AWS)
 
-## Hosted At
-https://ec2-54-159-118-33.compute-1.amazonaws.com/
-
 ## Deployment Guide
 - Use files from ```/deploys```
 - Enter proper details in ```.htaccess```
